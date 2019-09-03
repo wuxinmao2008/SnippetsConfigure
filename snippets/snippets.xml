@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippets>
+    <snippet group="C++" trigger="connect" id="" complement="with lambda" removed="false" modified="false">connect($sender$, &amp;$SenderType$::$signal$, [=](){
+    $sender$-&gt;$doSomeThings$();
+});</snippet>
+    <snippet group="C++" trigger="connect" id="" complement="with slot" removed="false" modified="false">connect($sender$, &amp;$SenderType$::$signal$,
+        $receiver$,  &amp;$ReceiverType$::$slot$);</snippet>
+    <snippet group="C++" trigger="connect" id="" complement="with slot from this" removed="false" modified="false">connect($sender$, &amp;$SenderType$::$signal$,
+        this,  &amp;$ThisType$::$slot$);</snippet>
+    <snippet group="C++" trigger="event" id="" complement="handle custom event" removed="false" modified="false">if ($event$-&gt;type() == QEvent::$Type$) {
+    auto $e$ = dynamic_cast&lt;$CustomEventType*&gt;$($event$);
+    if($e$)
+    {
+        auto value =$e$-&gt;$get$();
+        $value$;
+    }
+    return true;
+} 
+// Make sure the rest of events are handled
+return $QWidget$::event($event$);</snippet>
+    <snippet group="C++" trigger="main" id="cpp_main" complement="" removed="false" modified="true">int main(int argc, char *argv[])
+{
+    $$
+    return 0;
+}
+</snippet>
+    <snippet group="C++" trigger="QDebug" id="" complement="operator&lt;&lt;" removed="false" modified="false">QDebug operator&lt;&lt;(QDebug debug, const $Type$ &amp;$t$)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() &lt;&lt; '(' &lt;&lt; $t$.toString() &lt;&lt; ')';
+    return debug;
+}</snippet>
+    <snippet group="C++" trigger="QDir" id="" complement="for each entryInfoList" removed="false" modified="false">QDir dir($dirName$);
+dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+dir.setSorting(QDir::Size | QDir::Reversed);
+const auto entryList = dir.entryInfoList();
+for (const auto&amp; fileInfo:entryList) {
+    auto name = fileInfo.fileName();
+    $name$;
+}</snippet>
+    <snippet group="C++" trigger="QFile" id="" complement="read by byte" removed="false" modified="false">QFile file($fileName$);
+if (file.open(QFile::ReadOnly)) {
+    char buf[$size$] = {0};
+    qint64 lineLength = file.readLine(buf, sizeof(buf));
+    if (lineLength != -1) {
+        // the line is available in buf
+    }
+}</snippet>
+    <snippet group="C++" trigger="QFile" id="" complement="read with text stream" removed="false" modified="false">QFile file($fileName$);
+if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    return false;
+
+QTextStream in(&amp;file);
+while (!in.atEnd()) {
+    QString line = in.readLine();
+    $process_line$(line);
+}</snippet>
+    <snippet group="C++" trigger="QFile" id="" complement="write with text stream" removed="false" modified="false">QFile file($fileName$);
+if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    return false;
+
+QTextStream out(&amp;file);
+out &lt;&lt; $toWrite$ &lt;&lt; &quot;\\n&quot;;</snippet>
+    <snippet group="C++" trigger="QFiledialog" id="" complement="getExistingDirectory" removed="false" modified="false">QFileDialog::getExistingDirectory(this, QString(&quot;$open$&quot;),QDir::currentPath(),
+                                  QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+if(!$dir$.isEmpty())
+{
+    
+}</snippet>
+    <snippet group="C++" trigger="QFileDialog" id="" complement="getOpenFileName" removed="false" modified="false">QFileDialog::getOpenFileName(this, QString(&quot;$open$&quot;),QDir::currentPath(),
+                             QString(&quot;File(*.txt *.jpg)&quot;));
+if(!$fileName$.isEmpty())
+{
+    
+}</snippet>
+    <snippet group="C++" trigger="QProgress" id="" complement="start a progress" removed="false" modified="false">QProcess *myProcess = new QProcess($parent$);
+QString program = $pathToProgram$;
+QStringList arguments;
+arguments &lt;&lt; &quot;$arg1$&quot; &lt;&lt; &quot;$arg2$&quot;;
+myProcess-&gt;start(program, arguments);
+if (!myProcess-&gt;waitForStarted())
+{
+    return false;
+}
+myProcess-&gt;write(&quot;&quot;);
+myProcess-&gt;closeWriteChannel();
+
+if (!myProcess-&gt;waitForFinished())
+{
+    return false;
+}
+QByteArray result = myProcess-&gt;readAll();</snippet>
+    <snippet group="C++" trigger="QSettings" id="" complement="read settings" removed="false" modified="false">QSettings settings($fileName$, QSettings::IniFormat);
+
+settings.beginGroup(&quot;$groupName$&quot;);
+auto value = settings.value(&quot;saveKey&quot;,$defaultValue$).toString();
+settings.endGroup();</snippet>
+    <snippet group="C++" trigger="QSettings" id="" complement="write settings" removed="false" modified="false">QSettings settings($fileName$, QSettings::IniFormat);
+
+settings.beginGroup(&quot;$groupName$&quot;);
+settings.setValue(&quot;saveKey&quot;, $toSave$);
+settings.endGroup();</snippet>
+    <snippet group="C++" trigger="QSignalBlocker" id="" complement="construct" removed="false" modified="false">{
+    const QSignalBlocker blocker($someQObject$);
+    // no signals here
+    $someQObject$-&gt;$doSomeThing$();
+}</snippet>
+    <snippet group="C++" trigger="QStringListModel" id="" complement="new and set stringlist" removed="false" modified="false">QStringListModel *model = new QStringListModel($parent$);
+QStringList list;
+list &lt;&lt; &quot;a&quot; &lt;&lt; &quot;b&quot; &lt;&lt; &quot;c&quot;;
+model-&gt;setStringList(list);</snippet>
+    <snippet group="C++" trigger="QTimer" id="" complement="construct and connect" removed="false" modified="false">auto *timer = new QTimer(this);
+connect(timer, &amp;QTimer::timeout, this, &amp;$ThisType$::$onTimer$));
+timer-&gt;start($1000$);</snippet>
+    <snippet group="C++" trigger="QTimer" id="" complement="single shot with lambda" removed="false" modified="false">QTimer::singleShot($200$, [=](){
+    this-&gt;$doSomeThing$();
+});</snippet>
+    <snippet group="C++" trigger="QTimer" id="" complement="single shot with slot" removed="false" modified="false">QTimer::singleShot($200$, this, &amp;$ThisType$::$SlotFunction$);</snippet>
+</snippets>
